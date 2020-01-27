@@ -3,7 +3,7 @@
 # path:       ~/projects/rclone/sync_keepass.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/rclone
-# date:       2020-01-24T18:42:46+0100
+# date:       2020-01-27T11:59:08+0100
 
 rc_name="dropbox"
 kp_file="klassiker.kdbx"
@@ -86,7 +86,7 @@ sync_pass ()
 }
 
 # check internet connection
-if ping -c1 -W1 -q 1.1.1.1 > /dev/null 2>&1; then
+if ping -c1 -W1 -q 1.1.1.1 >/dev/null 2>&1; then
     sync_pass
 else
     notify-send -i "$HOME/projects/shell/icons/caution.png" "KeePass [Failure]" "internet connection not available!"
