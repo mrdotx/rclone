@@ -3,7 +3,7 @@
 # path:       ~/projects/rclone/sync_keepass.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/rclone
-# date:       2020-02-03T13:24:33+0100
+# date:       2020-02-24T09:32:08+0100
 
 rc_name="dropbox"
 kp_file="klassiker.kdbx"
@@ -39,7 +39,7 @@ get_remote_pass_mtime ()
         unset output
         return 1
     else
-        string=$(echo "$output" | tr -s ' ' | cut -d ' ' -f 3,4;)
+        string=$(printf "%s\n" "$output" | tr -s ' ' | cut -d ' ' -f 3,4;)
         get_dt_from_str "$string"
         unset output
         return 0

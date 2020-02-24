@@ -3,7 +3,7 @@
 # path:       ~/projects/rclone/sync_rclone.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/rclone
-# date:       2020-02-03T13:24:39+0100
+# date:       2020-02-24T09:41:44+0100
 
 # color variables
 #black=$(tput setaf 0)
@@ -44,31 +44,31 @@ Dropbox;      $rc_dir/dropbox/;     dropbox:/;     $rc_dir/dropbox/.filter
 "
 
 rc_vars() {
-    title=$(echo "$1" | cut -d ";" -f1 | tr -d ' ')
-    src=$(echo "$1" | cut -d ";" -f2 | tr -d ' ')
-    dest=$(echo "$1" | cut -d ";" -f3 | tr -d ' ')
-    filter=$(echo "$1" | cut -d ";" -f4 | tr -d ' ')
+    title=$(printf "%s" "$1" | cut -d ";" -f1 | tr -d ' ')
+    src=$(printf "%s" "$1" | cut -d ";" -f2 | tr -d ' ')
+    dest=$(printf "%s" "$1" | cut -d ";" -f3 | tr -d ' ')
+    filter=$(printf "%s" "$1" | cut -d ";" -f4 | tr -d ' ')
 }
 
 rc_check() {
-    echo "[${yellow}$1${reset}] <- $2"
+    printf "[%s%s%s] <- %s\n" "${yellow}" "$1" "${reset}" "$2"
     rclone check -l -P "$2" "$3" --filter-from="$4"
 }
 
 rc_copy() {
-    echo "[${yellow}$1${reset}] <- $2"
+    printf "[%s%s%s] <- %s\n" "${yellow}" "$1" "${reset}" "$2"
     rclone copy -l -P "$2" "$3" --filter-from="$4"
-    echo "[${yellow}$1${reset}] -> $2"
+    printf "[%s%s%s] -> %s\n" "${yellow}" "$1" "${reset}" "$2"
     rclone copy -l -P "$3" "$2" --filter-from="$4"
 }
 
 rc_sync_to() {
-    echo "[${yellow}$1${reset}] <- $2"
+    printf "[%s%s%s] <- %s\n" "${yellow}" "$1" "${reset}" "$2"
     rclone sync -l -P "$2" "$3" --filter-from="$4"
 }
 
 rc_sync_from() {
-    echo "[${yellow}$1${reset}] -> $2"
+    printf "[%s%s%s] -> %s\n" "${yellow}" "$1" "${reset}" "$2"
     rclone sync -l -P "$3" "$2" --filter-from="$4"
 }
 
@@ -85,7 +85,7 @@ rc_exec() {
 }
 
 if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ $# -eq 0 ]; then
-    echo "$help"
+    printf "%s\n" "$help"
     exit 0
 elif [ "$1" = "-check" ]; then
     rc_exec "rc_check"
