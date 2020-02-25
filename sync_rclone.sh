@@ -3,7 +3,7 @@
 # path:       ~/projects/rclone/sync_rclone.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/rclone
-# date:       2020-02-24T09:41:44+0100
+# date:       2020-02-25T14:46:41+0100
 
 # color variables
 #black=$(tput setaf 0)
@@ -12,7 +12,7 @@
 yellow=$(tput setaf 3)
 #blue=$(tput setaf 4)
 #magenta=$(tput setaf 5)
-#cyan=$(tput setaf 6)
+cyan=$(tput setaf 6)
 #white=$(tput setaf 7)
 reset=$(tput sgr0)
 
@@ -51,24 +51,24 @@ rc_vars() {
 }
 
 rc_check() {
-    printf "[%s%s%s] <- %s\n" "${yellow}" "$1" "${reset}" "$2"
+    printf "[%s%s%s] <- %s%s%s\n" "${yellow}" "$1" "${reset}" "${cyan}" "$2" "${reset}"
     rclone check -l -P "$2" "$3" --filter-from="$4"
 }
 
 rc_copy() {
-    printf "[%s%s%s] <- %s\n" "${yellow}" "$1" "${reset}" "$2"
+    printf "[%s%s%s] <- %s%s%s\n" "${yellow}" "$1" "${reset}" "${cyan}" "$2" "${reset}"
     rclone copy -l -P "$2" "$3" --filter-from="$4"
-    printf "[%s%s%s] -> %s\n" "${yellow}" "$1" "${reset}" "$2"
+    printf "[%s%s%s] -> %s%s%s\n" "${yellow}" "$1" "${reset}" "${cyan}" "$2" "${reset}"
     rclone copy -l -P "$3" "$2" --filter-from="$4"
 }
 
 rc_sync_to() {
-    printf "[%s%s%s] <- %s\n" "${yellow}" "$1" "${reset}" "$2"
+    printf "[%s%s%s] <- %s%s%s\n" "${yellow}" "$1" "${reset}" "${cyan}" "$2" "${reset}"
     rclone sync -l -P "$2" "$3" --filter-from="$4"
 }
 
 rc_sync_from() {
-    printf "[%s%s%s] -> %s\n" "${yellow}" "$1" "${reset}" "$2"
+    printf "[%s%s%s] -> %s%s%s\n" "${yellow}" "$1" "${reset}" "${cyan}" "$2" "${reset}"
     rclone sync -l -P "$3" "$2" --filter-from="$4"
 }
 
