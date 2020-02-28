@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/projects/rclone/sync_rclone.sh
+# path:       ~/repos/rclone/sync_rclone.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/rclone
-# date:       2020-02-25T14:46:41+0100
+# date:       2020-02-28T08:20:53+0100
 
 # color variables
 #black=$(tput setaf 0)
