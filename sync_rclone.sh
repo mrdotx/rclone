@@ -3,7 +3,7 @@
 # path:       ~/repos/rclone/sync_rclone.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/rclone
-# date:       2020-02-28T08:20:53+0100
+# date:       2020-02-29T22:46:04+0100
 
 # color variables
 #black=$(tput setaf 0)
@@ -51,7 +51,7 @@ rc_vars() {
 }
 
 rc_check() {
-    printf "[%s%s%s] <- %s%s%s\n" "${yellow}" "$1" "${reset}" "${cyan}" "$2" "${reset}"
+    printf "[%s%s%s] <-> %s%s%s\n" "${yellow}" "$1" "${reset}" "${cyan}" "$2" "${reset}"
     rclone check -l -P "$2" "$3" --filter-from="$4"
 }
 
