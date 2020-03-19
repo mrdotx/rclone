@@ -3,7 +3,7 @@
 # path:       ~/repos/rclone/sync_rclone.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/rclone
-# date:       2020-02-29T22:46:04+0100
+# date:       2020-03-19T14:30:37+0100
 
 # color variables
 #black=$(tput setaf 0)
@@ -76,10 +76,9 @@ rc_exec() {
     printf "%s\n" "$rc_cfg" | {
         while IFS= read -r line
         do
-            if [ -n "$line" ]; then
-                rc_vars "$line"
-                $1 "$title" "$src" "$dest" "$filter"
-            fi
+            [ -n "$line" ] \
+                && rc_vars "$line" \
+                && $1 "$title" "$src" "$dest" "$filter"
         done
     }
 }

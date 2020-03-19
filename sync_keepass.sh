@@ -3,7 +3,7 @@
 # path:       ~/repos/rclone/sync_keepass.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/rclone
-# date:       2020-03-12T16:52:59+0100
+# date:       2020-03-19T14:29:17+0100
 
 rc_name="dropbox"
 kp_file="klassiker.kdbx"
@@ -56,12 +56,11 @@ sync_pass()
     notify-send "KeePass [Files]" "local:  $local_mtime\nremote: $remote_mtime"
 
     # if remote file don't exists
-    if [ -z "$remote_mtime" ]; then
-        notify-send "KeePass [Files]" "remote file not found!\nuploading...!"
-        $pass_exp
-        notify-send "KeePass [Database]" "created!"
-        return 0
-    fi
+    [ -z "$remote_mtime" ] \
+        && notify-send "KeePass [Files]" "remote file not found!\nuploading...!" \
+        && $pass_exp \
+        && notify-send "KeePass [Database]" "created!" \
+        && return 0
 
     # conversion required for comparison
     local_mtime_sec=$(date -d "$local_mtime" +%s)
