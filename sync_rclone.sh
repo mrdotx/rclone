@@ -3,7 +3,7 @@
 # path:       ~/repos/rclone/sync_rclone.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/rclone
-# date:       2020-03-19T14:30:37+0100
+# date:       2020-03-24T19:17:54+0100
 
 # color variables
 #black=$(tput setaf 0)
@@ -34,7 +34,7 @@ help="$script [-h/--help] -- script to copy/sync from/to cloud with rclone
     $script -sync_to
     $script -sync_from"
 
-rc_dir="$HOME/cloud"
+rc_dir="$HOME/.local/share/cloud"
 rc_cfg="
 web.de;       $rc_dir/webde/;       webde:/;       $rc_dir/webde/.filter
 GMX;          $rc_dir/gmx/;         gmx:/;         $rc_dir/gmx/.filter
