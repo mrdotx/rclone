@@ -3,17 +3,17 @@
 # path:       /home/klassiker/.local/share/repos/rclone/sync_rclone.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/rclone
-# date:       2020-04-29T11:13:52+0200
+# date:       2020-04-30T19:14:52+0200
 
 # color variables
-#black=$(tput setaf 0)
-#red=$(tput setaf 1)
-#green=$(tput setaf 2)
+# black=$(tput setaf 0)
+# red=$(tput setaf 1)
+# green=$(tput setaf 2)
 yellow=$(tput setaf 3)
-#blue=$(tput setaf 4)
-#magenta=$(tput setaf 5)
+# blue=$(tput setaf 4)
+# magenta=$(tput setaf 5)
 cyan=$(tput setaf 6)
-#white=$(tput setaf 7)
+# white=$(tput setaf 7)
 reset=$(tput sgr0)
 
 script=$(basename "$0")
