@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/rclone/sync_rclone.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/rclone
-# date:       2020-05-22T16:44:23+0200
+# date:       2020-05-23T20:40:51+0200
 
 # color variables
 yellow=$(tput setaf 3)
@@ -38,10 +38,22 @@ Dropbox;      $rc_dir/dropbox/;     dropbox:/;     $rc_dir/dropbox/.filter
 "
 
 rc_vars() {
-    title=$(printf "%s" "$1" | cut -d ";" -f1 | tr -d ' ')
-    src=$(printf "%s" "$1" | cut -d ";" -f2 | tr -d ' ')
-    dest=$(printf "%s" "$1" | cut -d ";" -f3 | tr -d ' ')
-    filter=$(printf "%s" "$1" | cut -d ";" -f4 | tr -d ' ')
+    title=$(printf "%s" "$1" \
+        | cut -d ";" -f1 \
+        | tr -d ' ' \
+    )
+    src=$(printf "%s" "$1" \
+        | cut -d ";" -f2 \
+        | tr -d ' ' \
+    )
+    dest=$(printf "%s" "$1" \
+        | cut -d ";" -f3 \
+        | tr -d ' ' \
+    )
+    filter=$(printf "%s" "$1" \
+        | cut -d ";" -f4 \
+        | tr -d ' ' \
+    )
 }
 
 rc_check() {

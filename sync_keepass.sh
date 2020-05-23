@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/rclone/sync_keepass.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/rclone
-# date:       2020-04-29T11:13:48+0200
+# date:       2020-05-23T20:37:30+0200
 
 rc_name="dropbox"
 kp_file="klassiker.kdbx"
@@ -27,7 +27,9 @@ get_dt_from_str()
 # parse local passwords file modification time
 get_local_pass_mtime()
 {
-    string=$(stat -c %y "$kp_local_path" | cut -d ' ' -f 1,2;)
+    string=$(stat -c %y "$kp_local_path" \
+        | cut -d ' ' -f 1,2; \
+    )
     get_dt_from_str "$string"
 }
 
@@ -39,7 +41,10 @@ get_remote_pass_mtime()
         unset output
         return 1
     else
-        string=$(printf "%s\n" "$output" | tr -s ' ' | cut -d ' ' -f 3,4;)
+        string=$(printf "%s\n" "$output" \
+            | tr -s ' ' \
+            | cut -d ' ' -f 3,4; \
+        )
         get_dt_from_str "$string"
         unset output
         return 0
