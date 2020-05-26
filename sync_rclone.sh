@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/rclone/sync_rclone.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/rclone
-# date:       2020-05-23T20:40:51+0200
+# date:       2020-05-26T12:36:52+0200
 
 # color variables
 yellow=$(tput setaf 3)
@@ -37,7 +37,7 @@ OneDrive;     $rc_dir/onedrive/;    onedrive:/;    $rc_dir/onedrive/.filter
 Dropbox;      $rc_dir/dropbox/;     dropbox:/;     $rc_dir/dropbox/.filter
 "
 
-rc_vars() {
+rc_vars(){
     title=$(printf "%s" "$1" \
         | cut -d ";" -f1 \
         | tr -d ' ' \
@@ -56,29 +56,29 @@ rc_vars() {
     )
 }
 
-rc_check() {
+rc_check(){
     printf "[%s%s%s] <-> %s%s%s\n" "${yellow}" "$1" "${reset}" "${cyan}" "$2" "${reset}"
     rclone check -l -P "$2" "$3" --filter-from="$4"
 }
 
-rc_copy() {
+rc_copy(){
     printf "[%s%s%s] <- %s%s%s\n" "${yellow}" "$1" "${reset}" "${cyan}" "$2" "${reset}"
     rclone copy -l -P "$2" "$3" --filter-from="$4"
     printf "[%s%s%s] -> %s%s%s\n" "${yellow}" "$1" "${reset}" "${cyan}" "$2" "${reset}"
     rclone copy -l -P "$3" "$2" --filter-from="$4"
 }
 
-rc_sync_to() {
+rc_sync_to(){
     printf "[%s%s%s] <- %s%s%s\n" "${yellow}" "$1" "${reset}" "${cyan}" "$2" "${reset}"
     rclone sync -l -P "$2" "$3" --filter-from="$4"
 }
 
-rc_sync_from() {
+rc_sync_from(){
     printf "[%s%s%s] -> %s%s%s\n" "${yellow}" "$1" "${reset}" "${cyan}" "$2" "${reset}"
     rclone sync -l -P "$3" "$2" --filter-from="$4"
 }
 
-rc_exec() {
+rc_exec(){
     printf "%s\n" "$rc_cfg" | {
         while IFS= read -r line
         do
