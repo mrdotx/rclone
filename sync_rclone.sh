@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/rclone/sync_rclone.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/rclone
-# date:       2020-06-06T09:25:23+0200
+# date:       2020-06-08T13:55:50+0200
 
 # color variables
 yellow=$(tput setaf 3)
@@ -28,63 +28,63 @@ help="$script [-h/--help] -- script to copy/sync from/to cloud with rclone
     $script -sync_to
     $script -sync_from"
 
-rc_dir="$HOME/.local/share/cloud"
-rc_cfg="
-web.de;       $rc_dir/webde/;       webde:/;       $rc_dir/webde/.filter
-GMX;          $rc_dir/gmx/;         gmx:/;         $rc_dir/gmx/.filter
-Google Drive; $rc_dir/googledrive/; googledrive:/; $rc_dir/googledrive/.filter
-OneDrive;     $rc_dir/onedrive/;    onedrive:/;    $rc_dir/onedrive/.filter
-Dropbox;      $rc_dir/dropbox/;     dropbox:/;     $rc_dir/dropbox/.filter
+rclone_directory="$HOME/.local/share/cloud"
+rclone_config="
+web.de;       $rclone_directory/webde/;       webde:/;       $rclone_directory/webde/.filter
+GMX;          $rclone_directory/gmx/;         gmx:/;         $rclone_directory/gmx/.filter
+Google Drive; $rclone_directory/googledrive/; googledrive:/; $rclone_directory/googledrive/.filter
+OneDrive;     $rclone_directory/onedrive/;    onedrive:/;    $rclone_directory/onedrive/.filter
+Dropbox;      $rclone_directory/dropbox/;     dropbox:/;     $rclone_directory/dropbox/.filter
 "
 
-rc_vars() {
+rclone_vars() {
     title=$(printf "%s" "$1" \
         | cut -d ";" -f1 \
         | tr -d ' ' \
     )
-    src=$(printf "%s" "$1" \
+    source_directory=$(printf "%s" "$1" \
         | cut -d ";" -f2 \
         | tr -d ' ' \
     )
-    dest=$(printf "%s" "$1" \
+    destination_directory=$(printf "%s" "$1" \
         | cut -d ";" -f3 \
         | tr -d ' ' \
     )
-    filter=$(printf "%s" "$1" \
+    filter_file=$(printf "%s" "$1" \
         | cut -d ";" -f4 \
         | tr -d ' ' \
     )
 }
 
-rc_check() {
+rclone_check() {
     printf "[%s%s%s] <-> %s%s%s\n" "${yellow}" "$1" "${reset}" "${cyan}" "$2" "${reset}"
     rclone check -l -P "$2" "$3" --filter-from="$4"
 }
 
-rc_copy() {
+rclone_copy() {
     printf "[%s%s%s] <- %s%s%s\n" "${yellow}" "$1" "${reset}" "${cyan}" "$2" "${reset}"
     rclone copy -l -P "$2" "$3" --filter-from="$4"
     printf "[%s%s%s] -> %s%s%s\n" "${yellow}" "$1" "${reset}" "${cyan}" "$2" "${reset}"
     rclone copy -l -P "$3" "$2" --filter-from="$4"
 }
 
-rc_sync_to() {
+rclone_sync_to() {
     printf "[%s%s%s] <- %s%s%s\n" "${yellow}" "$1" "${reset}" "${cyan}" "$2" "${reset}"
     rclone sync -l -P "$2" "$3" --filter-from="$4"
 }
 
-rc_sync_from() {
+rclone_sync_from() {
     printf "[%s%s%s] -> %s%s%s\n" "${yellow}" "$1" "${reset}" "${cyan}" "$2" "${reset}"
     rclone sync -l -P "$3" "$2" --filter-from="$4"
 }
 
-rc_exec() {
-    printf "%s\n" "$rc_cfg" | {
+rclone_execute() {
+    printf "%s\n" "$rclone_config" | {
         while IFS= read -r line
         do
             [ -n "$line" ] \
-                && rc_vars "$line" \
-                && $1 "$title" "$src" "$dest" "$filter"
+                && rclone_vars "$line" \
+                && $1 "$title" "$source_directory" "$destination_directory" "$filter_file"
         done
     }
 }
@@ -93,11 +93,11 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ $# -eq 0 ]; then
     printf "%s\n" "$help"
     exit 0
 elif [ "$1" = "-check" ]; then
-    rc_exec "rc_check"
+    rclone_execute "rclone_check"
 elif [ "$1" = "-copy" ]; then
-    rc_exec "rc_copy"
+    rclone_execute "rclone_copy"
 elif [ "$1" = "-sync_to" ]; then
-    rc_exec "rc_sync_to"
+    rclone_execute "rclone_sync_to"
 elif [ "$1" = "-sync_from" ]; then
-    rc_exec "rc_sync_from"
+    rclone_execute "rclone_sync_from"
 fi
