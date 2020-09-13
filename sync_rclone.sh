@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/rclone/sync_rclone.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/rclone
-# date:       2020-09-12T14:16:07+0200
+# date:       2020-09-13T11:10:36+0200
 
 # color variables
 green=$(tput setaf 2)
@@ -80,8 +80,7 @@ rclone_sync_from() {
 
 rclone_execute() {
     printf "%s\n" "$rclone_config" | {
-        while IFS= read -r line
-        do
+        while IFS= read -r line; do
             [ -n "$line" ] \
                 && rclone_vars "$line" \
                 && $1 "$title" "$source_directory" "$destination_directory" "$filter_file"
