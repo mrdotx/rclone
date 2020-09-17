@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/rclone/sync_rclone.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/rclone
-# date:       2020-09-13T11:10:36+0200
+# date:       2020-09-17T09:55:58+0200
 
 # color variables
 green=$(tput setaf 2)
@@ -13,10 +13,9 @@ reset=$(tput sgr0)
 script=$(basename "$0")
 help="$script [-h/--help] -- script to copy/sync from/to cloud with rclone
   Usage:
-    $script [option]
+    $script [-check/-copy/-sync_to/-sync_from]
 
   Setting:
-    [option]     = check, copy or sync
       -check     = check
       -copy      = copy
       -sync_to   = sync to destination
