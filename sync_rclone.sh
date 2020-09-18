@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/rclone/sync_rclone.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/rclone
-# date:       2020-09-17T09:55:58+0200
+# date:       2020-09-18T09:50:39+0200
 
 # color variables
 green=$(tput setaf 2)
@@ -87,15 +87,21 @@ rclone_execute() {
     }
 }
 
-if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ $# -eq 0 ]; then
-    printf "%s\n" "$help"
-    exit 1
-elif [ "$1" = "-check" ]; then
-    rclone_execute "rclone_check"
-elif [ "$1" = "-copy" ]; then
-    rclone_execute "rclone_copy"
-elif [ "$1" = "-sync_to" ]; then
-    rclone_execute "rclone_sync_to"
-elif [ "$1" = "-sync_from" ]; then
-    rclone_execute "rclone_sync_from"
-fi
+case "$1" in
+    -check)
+        rclone_execute "rclone_check"
+        ;;
+    -copy)
+        rclone_execute "rclone_copy"
+        ;;
+    -sync_to)
+        rclone_execute "rclone_sync_to"
+        ;;
+    -sync_from)
+        rclone_execute "rclone_sync_from"
+        ;;
+    *)
+        printf "%s\n" "$help"
+        exit 1
+        ;;
+esac
