@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/rclone/sync_keepass.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/rclone
-# date:       2020-06-08T12:00:43+0200
+# date:       2020-09-25T11:16:29+0200
 
 rclone_name="dropbox"
 keepass_file="klassiker.kdbx"
@@ -23,7 +23,7 @@ get_date_from_string() {
     date -d "$1" +"%F %T.%3N"
 }
 
-# parse local passwords file modification time
+# parse local file modification time
 get_local_database_mtime() {
     string=$(stat -c %y "$keepass_local_path" \
         | cut -d ' ' -f 1,2; \
@@ -31,57 +31,45 @@ get_local_database_mtime() {
     get_date_from_string "$string"
 }
 
-# parse remote passwords file modification time
+# parse remote file modification time
 get_remote_database_mtime() {
     output=$(rclone lsl $rclone_name:$keepass_remote_path 2>/dev/null)
-    if [ $? -eq 3 ]; then
-        unset output
-        return 1
-    else
         string=$(printf "%s\n" "$output" \
             | tr -s ' ' \
             | cut -d ' ' -f 3,4; \
         )
         get_date_from_string "$string"
-        unset output
-        return 0
-    fi
 }
 
 sync_database() {
-    # storing the values
+    # storing the values for comparison
     local_mtime=$(get_local_database_mtime)
-    remote_mtime=$(get_remote_database_mtime)
-
-    # modification times
-    notify-send "KeePass [Files]" "local:  $local_mtime\nremote: $remote_mtime"
-
-    # if remote file don't exists
-    [ -z "$remote_mtime" ] \
-        && notify-send "KeePass [Files]" "remote file not found!\nuploading...!" \
-        && $database_export \
-        && notify-send "KeePass [Database]" "created!" \
-        && return 0
-
-    # conversion required for comparison
     local_mtime_sec=$(date -d "$local_mtime" +%s)
+    remote_mtime=$(get_remote_database_mtime)
     remote_mtime_sec=$(date -d "$remote_mtime" +%s)
 
-    # local file - 10 sec being newer than remote
-    if [ $((local_mtime_sec-10)) -gt "$remote_mtime_sec" ]; then
-        notify-send "KeePass [Files]" "local file is probably newer than remote!\nuploading...!"
+    message_times="local file time:  $local_mtime\nremote file time: $remote_mtime"
+
+    # if remote file don't exists
+    if [ -z "$remote_mtime" ]; then
+        notify-send "KeePass [Files] - uploading..." \
+            "remote file not found\n$message_times"
         $database_export
-        notify-send "KeePass [Database]" "synchronized!"
-        return 0
+        notify-send "KeePass [Database] - created!"
+    # local file -10 sec being newer than remote
+    elif [ $((local_mtime_sec-10)) -gt "$remote_mtime_sec" ]; then
+        notify-send "KeePass [Files] - uploading..." \
+            "local file is newer than remote\n$message_times"
+        $database_export
+        notify-send "KeePass [Database] - synchronized!"
     # local file +10 sec being older than remote
     elif [ $((local_mtime_sec+10)) -lt "$remote_mtime_sec" ]; then
-        notify-send "KeePass [Files]" "local file is probably older than remote!\ndownloading...!"
+        notify-send "KeePass [Files] - downloading..." \
+            "local file is older then remote\n$message_times"
         $database_import
-        notify-send "KeePass [Database]" "synchronized!"
-        return 0
+        notify-send "KeePass [Database] - synchronized!"
     else
-        notify-send "KeePass [Database]" "allready synchronized!"
-        return 0
+        notify-send "KeePass [Database] - up to date!"
     fi
 }
 
@@ -89,6 +77,6 @@ sync_database() {
 if ping -c1 -W1 -q 1.1.1.1 >/dev/null 2>&1; then
     sync_database
 else
-    notify-send "KeePass [Failure]" "internet connection not available!"
+    notify-send "KeePass [Failure] - internet connection not available!"
     exit 1
 fi
