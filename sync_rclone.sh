@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/rclone/sync_rclone.sh
-# author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/rclone
-# date:       2020-12-29T13:25:36+0100
+# path:   /home/klassiker/.local/share/repos/rclone/sync_rclone.sh
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/rclone
+# date:   2021-01-15T13:53:52+0100
 
 # color variables
 green=$(tput setaf 2)
