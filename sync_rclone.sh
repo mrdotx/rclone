@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/rclone/sync_rclone.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/rclone
-# date:   2021-09-06T17:54:25+0200
+# date:   2021-09-23T14:40:48+0200
 
 # color variables
 green=$(tput setaf 2)
@@ -43,7 +43,7 @@ get_config_value() {
 }
 
 clone() {
-    printf "[%s%s%s] $2 %s%s%s\n" "$green" "$4" "$reset" "$blue" "$5" "$reset"
+    printf "%s%s%s $2 %s%s%s\n" "$green" "$4" "$reset" "$blue" "$5" "$reset"
     rclone "$1" -l -P "$4" "$5" --filter-from="$6.filter"
     printf "\n"
     printf "%s/%s\n" "$(du -sh "$6" | cut -d'	' -f1)" "$7" > "$6.usage"
