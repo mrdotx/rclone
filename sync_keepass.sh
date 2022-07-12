@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/rclone/sync_keepass.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/rclone
-# date:   2022-06-22T10:17:58+0200
+# date:   2022-07-12T11:04:38+0200
 
 rclone_name="dropbox"
 keepass_file="klassiker.kdbx"
@@ -61,7 +61,7 @@ sync_database() {
             -u low \
             "KeePass [Database] - created!"
     # local file -10 sec being newer than remote
-    elif [ $((local_mtime_sec-10)) -gt "$remote_mtime_sec" ]; then
+    elif [ $((local_mtime_sec - 10)) -gt "$remote_mtime_sec" ]; then
         notify-send \
             -u low \
             "KeePass [Files] - uploading..." \
@@ -71,7 +71,7 @@ sync_database() {
             -u low \
             "KeePass [Database] - synchronized!"
     # local file +10 sec being older than remote
-    elif [ $((local_mtime_sec+10)) -lt "$remote_mtime_sec" ]; then
+    elif [ $((local_mtime_sec + 10)) -lt "$remote_mtime_sec" ]; then
         notify-send \
             -u low \
             "KeePass [Files] - downloading..." \
