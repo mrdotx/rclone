@@ -3,11 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/rclone/sync_keepass.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/rclone
-# date:   2022-07-12T11:04:38+0200
+# date:   2023-02-20T09:58:13+0100
 
 rclone_name="dropbox"
 keepass_file="klassiker.kdbx"
-keepass_local="$HOME/.local/share/cloud/dropbox/.keepass/"
+keepass_local="$HOME/.local/cloud/dropbox/.keepass/"
 keepass_remote="/.keepass"
 
 # assemble full path to local and remote files
