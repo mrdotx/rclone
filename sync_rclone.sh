@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/rclone/sync_rclone.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/rclone
-# date:   2023-02-20T09:58:25+0100
+# date:   2023-07-25T18:30:51+0200
 
 # color variables
 green=$(tput setaf 2)
@@ -27,7 +27,7 @@ help="$script [-h/--help] -- script to copy/sync from/to cloud with rclone
     $script -sync_to
     $script -sync_from"
 
-rclone_dir="$HOME/.local/cloud"
+rclone_dir="$HOME/Cloud"
 rclone_config="
       web.de; $rclone_dir/webde/;       webde:/;        8,0G
          GMX; $rclone_dir/gmx/;         gmx:/;          8,0G
