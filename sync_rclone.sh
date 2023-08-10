@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/rclone/sync_rclone.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/rclone
-# date:   2023-07-25T18:30:51+0200
+# date:   2023-08-09T12:05:41+0200
 
 # color variables
 green=$(tput setaf 2)
@@ -44,9 +44,17 @@ get_config_value() {
 
 clone() {
     printf "%s%s%s $2 %s%s%s\n" "$green" "$4" "$reset" "$blue" "$5" "$reset"
-    rclone "$1" -l -P "$4" "$5" --filter-from="$6.filter"
+
+    ! [ -d "$6" ] \
+        && printf "folder \"%s\" not found...\n\n" "$6" \
+        && return
+
+    rclone "$1" -l -P "$4" "$5" --filter-from="$6.filter" \
+        && printf "%s/%s\n" \
+            "$(du -sh "$6" | cut -d'	' -f1)" \
+            "$7" > "$6.usage"
+
     printf "\n"
-    printf "%s/%s\n" "$(du -sh "$6" | cut -d'	' -f1)" "$7" > "$6.usage"
 }
 
 execute() {
