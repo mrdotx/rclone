@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/rclone/sync_rclone.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/rclone
-# date:   2023-08-09T12:05:41+0200
+# date:   2024-02-23T10:26:30+0100
 
 # color variables
 green=$(tput setaf 2)
@@ -58,8 +58,8 @@ clone() {
 }
 
 execute() {
-    printf "%s\n" "$rclone_config" | {
-        while IFS= read -r line; do
+    printf "%s\n" "$rclone_config" \
+        | while IFS= read -r line; do
             [ -n "$line" ] \
                 && clone "$1" "$3" \
                     "$(get_config_value "$line" "1")" \
@@ -68,7 +68,6 @@ execute() {
                     "$(get_config_value "$line" "2")" \
                     "$(get_config_value "$line" "4")"
         done
-    }
 }
 
 case "$1" in
