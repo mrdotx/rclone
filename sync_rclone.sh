@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/rclone/sync_rclone.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/rclone
-# date:   2024-04-25T09:59:48+0200
+# date:   2024-06-12T07:28:38+0200
 
 # color variables
 green="\033[32m"
@@ -51,7 +51,7 @@ clone() {
 
     rclone "$1" -l -P "$4" "$5" --filter-from="$6.filter" \
         && printf "%s/%s\n" \
-            "$(du -sh "$6" | cut -d'	' -f1)" \
+            "$(du -sh "$6" | cut -f1)" \
             "$7" > "$6.usage"
 
     printf "\n"
