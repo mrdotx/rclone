@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/rclone/sync_rclone.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/rclone
-# date:   2024-11-22T06:40:45+0100
+# date:   2025-02-28T07:21:12+0100
 
 # config
 rclone_dir="$HOME/Cloud"
@@ -17,9 +17,10 @@ rclone_config="
 "
 
 # color variables
-green="\033[32m"
-blue="\033[94m"
 reset="\033[0m"
+bold="\033[1m"
+blue="\033[94m"
+cyan="\033[96m"
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to copy/sync from/to cloud with rclone
@@ -47,8 +48,10 @@ get_config_value() {
 }
 
 clone() {
-    printf "%b%s%b %s %b%s%b\n" \
-        "$green" "$3" "$reset" "$2" "$blue" "$4" "$reset"
+    printf "%b%b::%b %b%s%b files %b%s%b %s %b%s%b\n" \
+        "$bold" "$blue" "$reset" "$bold" \
+        "$(printf "%s" "$1" | tr '[:lower:]' '[:upper:]')" "$reset" \
+        "$cyan" "$3" "$reset" "$2" "$cyan" "$4" "$reset"
 
     ! [ -d "$5" ] \
         && printf "folder \"%s\" not found...\n\n" "$5" \
