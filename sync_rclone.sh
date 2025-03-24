@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/rclone/sync_rclone.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/rclone
-# date:   2025-02-28T07:21:12+0100
+# date:   2025-03-24T06:15:30+0100
 
 # config
 rclone_dir="$HOME/Cloud"
@@ -48,16 +48,16 @@ get_config_value() {
 }
 
 clone() {
-    printf "%b%b::%b %b%s%b files %b%s%b %s %b%s%b\n" \
-        "$bold" "$blue" "$reset" "$bold" \
-        "$(printf "%s" "$1" | tr '[:lower:]' '[:upper:]')" "$reset" \
-        "$cyan" "$3" "$reset" "$2" "$cyan" "$4" "$reset"
+    printf "%b%b::%b %b%s files%b %b%s%b %b%s%b %b%s%b\n" \
+        "$bold" "$blue" "$reset" "$bold" "$1" "$reset" \
+        "$cyan" "$3" "$reset" "$bold" "$2" "$reset" "$cyan" "$4" "$reset"
 
     ! [ -d "$5" ] \
         && printf "folder \"%s\" not found...\n\n" "$5" \
         && return
 
-    rclone "$1" --quiet --progress --links "$3" "$4" --filter-from="$5.filter" \
+    rclone "$1" "$3" "$4" --filter-from="$5.filter" \
+            --bind 0.0.0.0 --quiet --progress --links \
         && printf "%s/%s\n" \
             "$(du -sh "$5" | cut -f1)" \
             "$6" > "$5.usage"
