@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/rclone/sync_rclone.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/rclone
-# date:   2025-03-24T06:15:30+0100
+# url:    https://github.com/mrdotx/rclone
+# date:   2025-08-12T04:16:48+0200
 
 # config
 rclone_dir="$HOME/Cloud"
