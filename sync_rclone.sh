@@ -3,17 +3,17 @@
 # path:   /home/klassiker/.local/share/repos/rclone/sync_rclone.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/rclone
-# date:   2025-08-12T04:16:48+0200
+# date:   2025-12-24T06:25:32+0100
 
 # config
 rclone_dir="$HOME/Cloud"
 rclone_config="
-    $rclone_dir/webde/;       webde:/;        8.0G
-    $rclone_dir/gmx/;         gmx:/;          8.0G
-    $rclone_dir/nextcloud/;   nextcloud:/;   50.0G
-    $rclone_dir/dropbox/;     dropbox:/;      3.25G
-    $rclone_dir/onedrive/;    onedrive:/;     5.0G
-    $rclone_dir/googledrive/; googledrive:/; 17.0G
+    $rclone_dir/webde/;       webde:/;         8.0G
+    $rclone_dir/gmx/;         gmx:/;           8.0G
+    $rclone_dir/nextcloud/;   nextcloud:/;   100.0G
+    $rclone_dir/dropbox/;     dropbox:/;       3.25G
+    $rclone_dir/onedrive/;    onedrive:/;      5.0G
+    $rclone_dir/googledrive/; googledrive:/;  17.0G
 "
 
 # color variables
