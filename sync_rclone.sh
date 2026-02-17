@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/rclone/sync_rclone.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/rclone
-# date:   2025-12-24T06:25:32+0100
+# date:   2026-02-17T05:58:13+0100
 
 # config
 rclone_dir="$HOME/Cloud"
@@ -16,11 +16,12 @@ rclone_config="
     $rclone_dir/googledrive/; googledrive:/;  17.0G
 "
 
-# color variables
-reset="\033[0m"
-bold="\033[1m"
-blue="\033[94m"
-cyan="\033[96m"
+# color variables for interactive shell
+tty -s \
+    && reset="\033[0m" \
+    && bold="\033[1m" \
+    && blue="\033[94m" \
+    && cyan="\033[96m"
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to copy/sync from/to cloud with rclone
