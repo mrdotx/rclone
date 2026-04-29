@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/rclone/sync_rclone.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/rclone
-# date:   2026-03-31T05:35:54+0200
+# date:   2026-04-29T05:11:31+0200
 
 # config
 rclone_dir="$HOME/Cloud"
@@ -54,7 +54,7 @@ clone() {
         "$cyan" "$3" "$reset" "$bold" "$2" "$reset" "$cyan" "$4" "$reset"
 
     ! [ -d "$5" ] \
-        && printf "folder \"%s\" not found...\n\n" "$5" \
+        && printf "directory \"%s\" not found...\n\n" "$5" \
         && return
 
     rclone "$1" "$3" "$4" --filter-from="$5.filter" \
